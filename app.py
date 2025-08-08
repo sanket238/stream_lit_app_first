@@ -5,20 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 st.title("🚀 Startup Funding Analysis (India)")
-st.markdown("""
-This dashboard presents an **interactive analysis of startup funding in India**  
-covering the period **January 2015 to August 2017**.
-
-You can explore:
-- 💰 **Total and Average Funding Trends**
-- 📈 **Month-over-Month (MoM) Growth**
-- 🏢 **Startup-specific Funding Details**
-- 🤝 **Investor-specific Portfolios**
-
-Use the sidebar to switch between **Overall Analysis**, **Startup View**, and **Investor View**.
-""")
-
-
 
 
 st.set_page_config(layout='wide',page_title="StartUp Analysis")
@@ -40,7 +26,6 @@ df['year']=df['date'].dt.year
 
 
 #data cleaning
-#df['Investors Name']=df['Investors Name'].fillna("Undisclosed")
 
 def load_investor_details(investor):
     st.title(investor)
@@ -88,6 +73,18 @@ def load_investor_details(investor):
     st.pyplot(fig2)
 
 def load_overall_analysis():
+    st.markdown("""
+    This dashboard presents an **interactive analysis of startup funding in India**  
+    covering the period **January 2015 to August 2017**.
+
+    You can explore:
+    - 💰 **Total and Average Funding Trends**
+    - 📈 **Month-over-Month (MoM) Growth**
+    - 🏢 **Startup-specific Funding Details**
+    - 🤝 **Investor-specific Portfolios**
+
+    Use the sidebar to switch between **Overall Analysis**, **Startup View**, and **Investor View**.
+    """)
     st.header("Overall Analysis")
 
     col1,col2,col3,col4= st.columns(4)
