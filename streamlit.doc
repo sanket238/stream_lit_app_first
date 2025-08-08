@@ -1,0 +1,117 @@
+import streamlit as st
+import pandas as pd
+import time
+st.title('Startup Dashboard')
+st.header("i am learning Streamlit")
+st.subheader("and i am loving it now")
+
+#write
+
+st.write("this is a normal text")
+
+#markdown
+
+st.markdown("""
+### My favorite movies
+            -Race 3
+            -movie1
+            -housefull
+""")
+
+#code display 
+
+st.code("""
+def foo(input):
+        return foo**2
+""")
+
+#-Latex
+st.latex('x^2 +y^2+2==0')
+
+#Display Elements
+
+#Dataframes
+
+df= pd.DataFrame({
+    'name':['sanket','viraj','raj'],
+    'marks':[50,60,70],
+    'package':[10,12,13]
+})
+st.dataframe(df)
+
+#metrics
+
+st.metric('Revenue','Rs 3L','+3%')
+
+#json
+st.json({
+    'name':['sanket','viraj','raj'],
+    'marks':[50,60,70],
+    'package':[10,12,13]
+})
+
+#display media
+
+#image
+#st.image("images.jpeg")
+#video
+
+
+#creating layouts
+
+st.sidebar.title('sidebar title')
+
+#columns
+
+col1,col2=st.columns(2)
+with col1:
+    st.image("images.jpeg")
+with col2:
+    st.image("images.jpeg")
+
+#showing status
+
+#progress bar
+#error message #success message
+
+st.error("login Failed")
+st.success("login successful")
+st.info("information provided")
+st.warning("warning here")
+
+#bar= st.progress(0)
+
+#for i in range(1,30):
+ #   bar.progress(i)
+
+#taking user input
+
+#text input
+email=st.text_input("enter email")
+number= st.number_input("enter number")
+date= st.date_input("enter date")
+
+#buttons-> ballons
+
+import streamlit as st
+import pandas as pd
+email=st.text_input("enter email")
+password= st.text_input("enter password")
+gender=st.selectbox("select gender",['male','female'])
+btn=st.button("login here")
+
+#if the button is clicked
+if btn:
+    if email=="sanket@gmail.com" and password =="1234":
+        st.balloons()
+        st.write(gender)
+    else:
+        st.error("login failed")
+
+#file upload
+
+file= st.file_uploader("Upload a csv file")
+
+if file is not None:
+    df=pd.read_csv(file)
+    st.dataframe(df.describe())
