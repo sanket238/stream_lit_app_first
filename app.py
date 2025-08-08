@@ -93,7 +93,6 @@ def load_overall_analysis():
         st.metric("Funded Startups",str(total_company))
 
     #mom chart
-
     st.header("MOM chart")
     selected_option=st.selectbox("Select Type",['Total',' Count'])
 
@@ -107,7 +106,7 @@ def load_overall_analysis():
     #temp_df['x-axis']=temp_df['month'].astype(str)+ '-'+temp_df['year'].astype(str)
 
     st.subheader("MOM chart")
-    fig3, ax3 = plt.subplots()
+    fig3, ax3 = plt.subplots(figsize=(14,4))
     ax3.plot(temp_df['date'],temp_df['amount'])
 
     #x-axis changes
@@ -116,7 +115,7 @@ def load_overall_analysis():
     ax3.xaxis.set_major_locator(mdates.MonthLocator(interval=4))  # every 4 months
     plt.setp(ax3.get_xticklabels(), rotation=90, ha='right')
     plt.tight_layout()
-    st.pyplot(fig3)    
+    st.pyplot(fig3,use_container_width=True)    
 
     
     
