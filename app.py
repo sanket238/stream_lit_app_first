@@ -4,6 +4,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+st.title("🚀 Startup Funding Analysis (India)")
+st.markdown("""
+This dashboard presents an **interactive analysis of startup funding in India**  
+covering the period **January 2015 to August 2017**.
+
+You can explore:
+- 💰 **Total and Average Funding Trends**
+- 📈 **Month-over-Month (MoM) Growth**
+- 🏢 **Startup-specific Funding Details**
+- 🤝 **Investor-specific Portfolios**
+
+Use the sidebar to switch between **Overall Analysis**, **Startup View**, and **Investor View**.
+""")
+
+
 
 
 st.set_page_config(layout='wide',page_title="StartUp Analysis")
@@ -63,12 +78,17 @@ def load_investor_details(investor):
    
     year_series=df[df['investors'].str.contains(investor)].groupby('year')['amount'].sum()
     st.subheader("Year by Year Investments")
-    fig2, ax2 = plt.subplots()
-    ax2.plot(year_series.index,year_series.values)
+    fig2, ax2 = plt.subplots(figsize=(12,4))
+    ax2.plot(year_series.index,year_series.values, marker='o')
+
+    #x-axis 
+    ax2.set_xticks(year_series.index)
+    ax2.set_xticklabels(year_series.index.astype(int))
+
     st.pyplot(fig2)
 
 def load_overall_analysis():
-    st.title("Overall Analysis")
+    st.header("Overall Analysis")
 
     col1,col2,col3,col4= st.columns(4)
     with col1:
@@ -93,7 +113,7 @@ def load_overall_analysis():
         st.metric("Funded Startups",str(total_company))
 
     #mom chart
-    st.header("MOM chart")
+    st.subheader("MOM chart")
     selected_option=st.selectbox("Select Type",['Total',' Count'])
 
     if selected_option=="Total":
@@ -105,7 +125,6 @@ def load_overall_analysis():
     temp_df['date'] = pd.to_datetime(temp_df[['year', 'month']].assign(day=1))
     #temp_df['x-axis']=temp_df['month'].astype(str)+ '-'+temp_df['year'].astype(str)
 
-    st.subheader("MOM chart")
     fig3, ax3 = plt.subplots(figsize=(14,4))
     ax3.plot(temp_df['date'],temp_df['amount'])
 
